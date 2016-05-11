@@ -1,0 +1,32 @@
+﻿<md-dialog aria-label="Загрузка документа">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Загрузка документа</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="vm.cancel()">
+                    <md-icon md-svg-icon="close" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content style="min-width: 800px; max-height: 810px;">
+
+            <form dz="{{vm.action}}" class="dropzone" style="height: 200px" reload="vm.ok()" type="{{vm.action}}">
+                <input name="id" type="hidden" value="{{vm.id}}"/>
+
+                <h2 class="dz-message">
+                    <i style="opacity: 0.2">--- Загрузите документ ---</i>
+                </h2>
+            </form>
+
+        </md-dialog-content>
+
+        <div class="md-actions" layout="row">
+            <span flex></span>
+            <md-button ng-click="vm.ok()" ng-disabled="!vm.isValid()">
+                ОK
+            </md-button>
+            <md-button ng-click="vm.cancel()" style="margin-right: 20px;">
+                Отмена
+            </md-button>
+        </div>
+</md-dialog>

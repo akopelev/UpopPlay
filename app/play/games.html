@@ -1,0 +1,23 @@
+﻿<md-toolbar class="site-content-toolbar md-whiteframe-z3" layout="row" layout-align="start center">
+    <menu-button></menu-button>
+    <header class="toolbar-header">Games</header>
+    <md-autocomplete style="width:600px" md-selected-item="vm.selectedGame"
+                     md-search-text="vm.textGame"
+                     md-items="item in vm.queryGame(vm.textGame)"
+                     md-selected-item-change="vm.gridOptions.api.onFilterChanged()"
+                     md-item-text="item.last_name + ' ' + item.first_name"
+                     md-min-length="0"
+                     placeholder="Choose game" md-menu-class="autocomplete-custom-template">
+        <md-item-template>
+            <span>{{item.first_name}}</span>
+            <span>{{item.last_name}}</span>
+        </md-item-template>
+    </md-autocomplete>
+
+    <grid-state name="toys"></grid-state>
+
+</md-toolbar>
+
+<md-content flex class="md-padding">
+    <div resize ag-grid="vm.gridOptions" class="ag-fresh" ng-style="style()" style="height: 650px"></div>
+</md-content>

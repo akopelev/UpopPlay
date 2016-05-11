@@ -1,0 +1,147 @@
+﻿
+
+
+
+<!DOCTYPE html>
+<html ng-app="app" ng-controller="MenuCtrl as vm">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge;" />
+    <meta charset="utf-8" />
+    <title ng-bind="vm.title()"></title>
+    <script> document.write('<base href="' + document.location + '" />'); </script>
+
+    <link href="/Content/bootstrap.min.css" rel="stylesheet">
+    <!--<link href="/Scripts/font-awesome/font-awesome.css" rel="stylesheet">-->
+    <link href="/Scripts/textAngular/textAngular.css" rel="stylesheet">
+    <link href="/Content/toastr.css" rel="stylesheet">
+    <link href="/Scripts/dropzone/basic.css" rel="stylesheet">
+    <link href="/Scripts/dropzone/dropzone.css" rel="stylesheet">
+    <link href="/Scripts/ag-grid/ag-grid.css" rel="stylesheet">
+    <link href="/Scripts/ag-grid/theme-fresh.css" rel="stylesheet">
+    <link href="/Content/angular-material.css" rel="stylesheet">
+    <link href="/Content/Site.css" rel="stylesheet">
+
+
+    <script src="/Scripts/jquery-2.2.0.js"></script>
+    <script src="/Scripts/lodash.js"></script>
+    <script src="/Scripts/moment.min.js"></script>
+    <script src="/Scripts/toastr.js"></script>
+    <script src="/Scripts/filesaver.js"></script>
+    <script src="/Scripts/angular.js"></script>
+    <script src="/Scripts/angular-touch.js"></script>
+    <script src="/Scripts/angular-animate.min.js"></script>
+    <script src="/Scripts/angular-aria.min.js"></script>
+    <script src="/Scripts/angular-messages.js"></script>
+    <script src="/Scripts/angular-ui-router.js"></script>
+    <!--<script src="/Scripts/statehelper.js"></script>-->
+    <script src="/Scripts/angular-resource.js"></script>
+    <script src="/Scripts/ag-grid/ag-grid.js"></script>
+
+    <script src="/Scripts/angular-ui/ui-bootstrap-tpls.js"></script>
+
+    <script src="/Scripts/dropzone/dropzone.js"></script>
+    <script src="/Scripts/dropzone/angular-dropzone.js"></script>
+    <script src="/Scripts/angular-material.js"></script>
+
+    <script src="/Scripts/textAngular/textAngular-rangy.min.js"></script>
+    <script src="/Scripts/textAngular/textAngular-sanitize.js"></script>
+    <script src="/Scripts/textAngular/textAngularSetup.js"></script>
+    <script src="/Scripts/textAngular/textAngular.js"></script>
+
+
+    <script src="/app/bud.js"></script>
+    <script src="/app/logger.js"></script>
+    <script src="/app/services/urlUtil.js"></script>
+    <script src="/app/services/html.js"></script>
+    <script src="/app/services/directives.js"></script>
+    <script src="/app/directives/dz.js"></script>
+    <script src="/app/directives/menuButton.js"></script>
+    <script src="/app/directives/gridState.js"></script>
+    <script src="/app/services/common.services.js"></script>
+    <script src="/app/services/askForTextDlg.js"></script>
+    <script src="/app/services/docDlg.js"></script>
+    <script src="/app/services/cx.js"></script>
+    <script src="/app/services/bs.js"></script>
+    <script src="/app/menuCtrl.js"></script>
+    <script src="/app/play/toyData.js"></script>
+    <script src="/app/play/dlg/toyDlg.js"></script>
+    <script src="/app/play/toysCtrl.js"></script>
+    <script src="/app/play/gamesCtrl.js"></script>
+
+</head>
+<body layout="row">
+    <md-sidenav md-is-locked-open="vm.isSidenavLockedOpen()" class="site-sidenav md-sidenav-left md-whiteframe-z2" ng-class="{'site-sidenav-kpi': vm.isKpi()}"
+                md-component-id="left">
+        <header class="nav-header-blue">
+            <div layout="row" layout-align="start center">
+                <div>
+                    <md-button class="md-fab md-mini md-primary md-hue-2" aria-label="Выйти" ng-click="vm.selectCx()">
+                        <md-icon md-svg-icon="back"></md-icon>
+                        <md-tooltip>
+                            Выйти
+                        </md-tooltip>
+                    </md-button>
+                </div>
+                <h4>
+                    {{title}}
+                </h4>
+            </div>
+        </header>
+        <md-progress-linear md-mode="{{progressMode}}" ng-disabled="!progressMode"></md-progress-linear>
+        <section layout="column" layout-align="space-between" flex>
+            <md-list>
+                <md-list-item ng-repeat="menu in vm.getPermMenus()">
+                    <md-button ng-click="vm.selectMenu(menu)" class="md-subheader"
+                               ng-style="menu === vm.selected ? {color: 'darkblue', 'font-weight': 'bold'} : {}">
+                        {{menu.title}}
+                    </md-button>
+                </md-list-item>
+            </md-list>
+            
+            <md-button class="md-icon-button md-primary" aria-label="Закрепить меню" ng-click="vm.lock()" ng-if="vm.showLock()">
+                <md-icon md-svg-icon="lock" style="color: gray;"></md-icon>
+                <md-tooltip>
+                    Закрепить меню
+                </md-tooltip>
+            </md-button>
+            <md-button class="md-icon-button md-primary" aria-label="Открепить меню" ng-click="vm.unlock()" ng-if="vm.showUnlock()">
+                <md-icon md-svg-icon="unlock" style="color: gray;"></md-icon>
+                <md-tooltip>
+                    Открепить меню
+                </md-tooltip>
+            </md-button>
+
+
+        </section>
+    </md-sidenav>
+    <div layout="column" tabindex="-1" role="main" flex="" class="layout-column flex">
+  
+        <div ui-view><menu-button></menu-button></div>
+    </div>
+
+</body>
+</html>
+
+
+<script type="text/ng-template" id="askForDelete.html">
+    <div class="modal-body">
+        <h3 class="modal-title">Удалить {{vm.name}}?</h3>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="vm.ok()">OK</button>
+        <button class="btn btn-warning" ng-click="vm.cancel()">Отмена</button>
+    </div>
+</script>
+
+<script type="text/ng-template" id="askForComments.html">
+    <div class="modal-header">
+        <h3 class="modal-title">{{vm.message}}</h3>
+    </div>
+    <div class="modal-body">
+        <input class="form-control" type="text" ng-model="vm.comments" />
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="vm.ok()">OK</button>
+        <button class="btn btn-warning" ng-click="vm.cancel()">Отмена</button>
+    </div>
+</script>

@@ -1,0 +1,46 @@
+﻿<md-toolbar class="site-content-toolbar md-whiteframe-z3" layout="row" layout-align="start center">
+    <menu-button></menu-button>
+    <header class="toolbar-header">Toys</header>
+    <md-input-container md-no-float class="md-block toolbar-input" style="width: 110px;">
+        <input placeholder="Фильтр..." type="text" ng-model="vm.gridOptions.quickFilterText" ng-change="vm.deselectAll()"/>
+    </md-input-container>
+
+    <md-button aria-label="Выбрать все" class="md-fab md-raised md-mini"
+               ng-click="vm.selectAll()">
+        <md-tooltip>Выбрать все</md-tooltip>
+        <md-icon md-svg-icon="selectAll"></md-icon>
+    </md-button>
+
+    <md-button class="md-raised" ng-click="vm.deselectAll()" ng-bind="'Button'">
+        <md-tooltip>Button</md-tooltip>
+    </md-button>
+
+    <md-button class="md-raised md-accent" ng-click="vm.deselectAll()" ng-bind="'Selected Button'">
+        <md-tooltip>Selected Button</md-tooltip>
+    </md-button>
+
+    <md-button class="md-raised md-primary groupX left bold">By faculty</md-button>
+    <md-button class="md-raised md-primary groupX middle md-hue-3">By status</md-button>
+    <md-button class="md-raised md-primary groupX right md-hue-3">W/o grouping</md-button>
+
+    <md-datepicker class="md-primary md-hue-1" ng-model="vm.date" md-placeholder="Дата" style="margin-left: 10px"></md-datepicker>
+
+    <md-input-container >
+        <label>Строк</label>
+        <md-select ng-model="vm.rowHeight" name="userId" required style="width: 100px" ng-change="vm.setRowHeight()" class="toolbar-select">
+            <md-option value="0">по имени</md-option>
+            <md-option value="46">в 2 строки</md-option>
+            <md-option value="70">в 3 строки</md-option>
+            <md-option value="90">в 4 строки</md-option>
+            <md-option value="110">в 5 строк</md-option>
+            <md-option value="130">в 6 строк</md-option>
+        </md-select>
+    </md-input-container>
+
+    <grid-state name="toys"></grid-state>
+
+</md-toolbar>
+
+<md-content flex class="md-padding">
+    <div resize ag-grid="vm.gridOptions" class="ag-fresh" ng-style="style()" style="height: 650px"></div>
+</md-content>

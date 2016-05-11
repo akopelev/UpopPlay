@@ -1,0 +1,41 @@
+<md-dialog aria-label="Добавление заместителя">
+    <form name="toyForm">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>{{vm.title}}</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="vm.cancel()">
+                    <md-icon md-svg-icon="close" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content style="width: 1150px; height1: 810px">
+            <md-content layout-padding>
+
+
+                <div layout-gt-sm="row">
+                    <md-input-container>
+                        <label>Год</label>
+                        <md-select ng-model="vm.buy.year" ng-change="vm.yearChanged()" ng-disabled="vm.buy.isSealed">
+                            <md-option ng-repeat="year in vm.years" value="{{year.value}}">
+                                {{year.value}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+
+                </div>
+
+            </md-content>
+        </md-dialog-content>
+
+        <div class="md-actions" layout="row">
+            <span flex></span>
+            <md-button ng-click="vm.ok()" ng-disabled="toyForm.$invalid">
+                ОK
+            </md-button>
+            <md-button ng-click="vm.cancel()" style="margin-right: 20px;">
+                Отмена
+            </md-button>
+        </div>
+    </form>
+</md-dialog>

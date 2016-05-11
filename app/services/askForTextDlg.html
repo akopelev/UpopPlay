@@ -1,0 +1,33 @@
+<md-dialog aria-label="{vm.title}}">
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>{{vm.title}}</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="vm.cancel()">
+                    <md-icon md-svg-icon="close" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content style="max-height: 810px; max-width: 800px; padding: 20px" layout="column">
+            <form name="buyForm">
+                <md-input-container flex>
+                    <label>{{vm.label}}</label>
+                    <input required ng-model="vm.text" name="text">
+                    <div ng-messages="vm.text">
+                        <div ng-message="required">Ввод обязателен</div>
+                    </div>
+                </md-input-container>
+            </form>
+        </md-dialog-content>
+        <div class="md-actions" layout="row">
+            <span flex></span>
+            <md-button ng-click="vm.ok()">
+                ОK
+            </md-button>
+            <md-button ng-click="vm.cancel()" style="margin-right: 20px;">
+                Отмена
+            </md-button>
+        </div>
+    </form>
+</md-dialog>

@@ -1,0 +1,27 @@
+<md-fab-speed-dial md-direction="left" md-open="vm.isOpen" style="margin-top: -15px"
+                   class="md-scale md-fab-top-right" ng-class="{ 'md-hover-full': vm.hover }"
+                   ng-mouseenter="vm.isOpen=true" ng-mouseleave="vm.isOpen=false">
+    <md-fab-trigger>
+        <md-button aria-label="menu" class="md-fab md-raised md-mini md-accent md-hue-1" ng-click="vm.toggleToolpanel()"
+                   ng-class="{'md-hue-2': vm.toolPanel}">
+            <md-tooltip md-direction="top" md-visible="tooltipVisible">Настройки</md-tooltip>
+            <md-icon md-svg-icon="settings" aria-label="Настройки"></md-icon>
+        </md-button>
+    </md-fab-trigger>
+    <md-fab-actions>
+        <!--<div ng-repeat="item in vm.items">-->
+        <md-button aria-label="Сбросить настройки" class="md-fab md-raised md-mini" ng-click="vm.refreshColState($event)">
+            <md-tooltip md-direction="bottom" md-visible="tooltipVisible" md-autohide="false">Сбросить</md-tooltip>
+            <md-icon md-svg-icon="refresh" aria-label="Сбросить"></md-icon>
+        </md-button>
+        <md-button aria-label="Сохранить настройки" class="md-fab md-raised md-mini" ng-click="vm.saveColState($event)">
+            <md-tooltip md-direction="bottom" md-visible="tooltipVisible" md-autohide="false">Сохранить</md-tooltip>
+            <md-icon md-svg-icon="save" aria-label="Сохранить"></md-icon>
+        </md-button>
+        <md-button aria-label="Восстановить настройки" class="md-fab md-raised md-mini" ng-click="vm.restoreColState($event)">
+            <md-tooltip md-direction="bottom" md-visible="tooltipVisible" md-autohide="false">Восстановить</md-tooltip>
+            <md-icon md-svg-icon="restore" aria-label="Восстановить"></md-icon>
+        </md-button>
+        <!--</div>-->
+    </md-fab-actions>
+</md-fab-speed-dial>

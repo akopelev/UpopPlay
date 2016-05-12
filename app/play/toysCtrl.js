@@ -1,9 +1,9 @@
 (function () {
     "use strict";
     angular.module("app").controller("toysCtrl", [
-        '$timeout', 'toyData', 'html', toysCtrl]);
+        '$timeout', 'toyData', 'html', 'cx', toysCtrl]);
 
-    function toysCtrl($timeout, toyData, html) {
+    function toysCtrl($timeout, toyData, html, cx) {
         var vm = this;
         vm.rowHeight = '46';
         vm.gridOptions = {
@@ -47,6 +47,7 @@
         vm.reload = reload;
         vm.reload();
         function reload() {
+            //cx.showLoading();
             $timeout(function () {
                 vm.gridOptions.api.setColumnDefs(vm.getColDefs());
                 vm.gridOptions.api.setRowData(toyData);

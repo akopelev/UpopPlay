@@ -36,6 +36,7 @@
 
             isAdm: function() { return $rootScope.perm === "adm" },
             isPp: function() { return $rootScope.perm === "pp" },
+            isPlay: function() { return $rootScope.perm === "play" },
             isProj: function() { return $rootScope.perm === "proj" },
             isBoss: function () { return $rootScope.perm === "boss" },
             isWatch: function () { return $rootScope.perm === "watch" },
@@ -86,12 +87,15 @@
         function getSites() {
             return $http.get("json/getSites");
         };
-        function setPermTitleUrl(perm, title, url) {
+        function setPermTitleUrl(perm, urlTitle, url, userTitle) {
             $rootScope.perm = perm;
-            $rootScope.title = title;
-            $rootScope.testProd = "prod";
+            $rootScope.urlTitle = urlTitle;
+            if (!angular.isUndefined (userTitle))
+                $rootScope.userTitle = userTitle;
             if (!angular.isUndefined (url))
                 $rootScope.url = url;
+
+            $rootScope.testProd = "prod";
         };
 
     };
@@ -118,10 +122,11 @@
         if (!perm) {
             $http.get("/json/getCx", { params: { url: url, area: area } }).success(function(serverCx) {
                 var perm = serverCx.perm;
-                cx.setPermTitleUrl(perm, serverCx.title, url);
+                cx.setPermTitleUrl(perm, serverCx.urlTitle, url, serverCx.userTitle);
             });
         } else {
-            $rootScope.title = url;
+            $rootScope.urlTitle = cx.isPlay() ? "Управление проектами образовательных программ" : url;
+            $rootScope.userTitle = cx.isPlay() ? "Иванищенко Мустафа Сидорович" : "user" + userId;
         }
     };
 

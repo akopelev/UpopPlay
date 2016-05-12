@@ -77,7 +77,7 @@
 
             rejectCreate: "Не утверждена",
             rejectChange: "Не изменена",
-            rejectaExclude: "Не исключена",
+            rejectExclude: "Не исключена",
         };
 
         function atProj(buy) {
@@ -164,7 +164,7 @@
         }
 
         function canToBoss2(ent) {
-            return (onAll() || onPanel() || onSecy()) && (ent.status == status.secy || ent.status == status.panel)
+            return (onAll() || onPanel() || onSecy()) && (ent.status == status.secy || ent.status == status.panel) && ent.oper != oper.exclude;
         }
 
         function canFormProt(ent) {

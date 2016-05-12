@@ -53,9 +53,12 @@
         }
 
         vm.menus = [
+            {perm: 'rector', state: 'repHead', title: 'Контрактация и расходование', area: "bud"},
+            {perm: 'rector', state: 'ppk', title: 'Показатели результативности', area: "bud"},
 
-            {perm: 'play', state: 'toys', title: 'Toys', area: "play"},
-            {perm: 'play', state: 'games', title: 'Games', area: "play"},
+            {perm: 'play', state: 'toys', title: 'Реестр ОП', area: "play"},
+            {perm: 'play', state: 'games', title: 'Показатели', area: "play"},
+            {perm: 'play', state: 'toys', title: 'Исходные данные', area: "play"},
 
             //{perm: 'proj', state: 'buy', title:'+Закупка' },
             {perm: 'pdu', state: 'pds', title: 'Подать заявку', params: {status: 'all'}},
@@ -185,6 +188,10 @@
         vm.isPp = function () {
             return cx.perm() == 'pp' || cx.perm() == 'adm'
         };
+        vm.isPlay = function () {
+            return cx.isPlay();
+        };
+
         vm.isKpi = function () {
             return cx.perm() == 'kpi' || cx.perm() == 'chk'
         };
@@ -213,15 +220,19 @@
         vm.onBuyProjAsWriter = function () {
             return cx.isWriter() && cx.isBuy() && cx.onProj();
         }
+
         vm.onBuyBossAsWriter = function () {
             return cx.isWriter() && cx.isBuy() && cx.onBoss();
         }
+
         vm.isManager = function () {
             return cx.isManager();
         }
+
         vm.onSecyAsWriter = function () {
             return cx.isWriter() && cx.onSecy();
         }
+
         vm.onSecyAsReader = function () {
             return cx.isReader() && cx.onSecy();
         }
